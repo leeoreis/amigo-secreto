@@ -1,6 +1,7 @@
 let amigos = [];
-let btnAdiciona = document.getElementById('btn_adiciona');
-let btnSorteia = document.getElementById('btn_sorteia');
+let btnAdiciona = document.getElementById("btn_adiciona");
+let btnSorteia = document.getElementById("btn_sorteia");
+let limiteMinimo = 0;
 
 function limpaNome() {
   document.getElementById("nome-amigo").value = "";
@@ -17,7 +18,10 @@ function adicionar() {
     return;
   }
 
-  let nomeAmigo = document.getElementById("nome-amigo").value.trim().toUpperCase();
+  let nomeAmigo = document
+    .getElementById("nome-amigo")
+    .value.trim()
+    .toUpperCase();
   let listaAmigos = document.getElementById("lista-amigos");
 
   if (amigos.includes(nomeAmigo)) {
@@ -33,11 +37,27 @@ function adicionar() {
     listaAmigos.innerHTML = listaAmigos.innerHTML + ", " + nomeAmigo;
   }
   limpaNome();
+  console.log(amigos.length);
 }
 
 function sortear() {
+  console.log(amigos.length);
+  if (amigos.length == 0) {
+    alert("Não há nomes para sorteio");
+    return;
+  }
   embaralha(amigos);
-  let limiteMinimo = 2;
+  limiteMinimo = document.getElementById("quantidade-minima").value;
+  if (limiteMinimo == 0) {
+    alert("Defina o limite mínimo");
+    return;
+  }
+
+  if (limiteMinimo == 1) {
+    alert("O limite mínimo deve ser maior que 1");
+    return;
+  }
+
   let listaSorteio = document.getElementById("lista-sorteio");
   let textoFalta = "";
 
@@ -63,10 +83,7 @@ function sortear() {
         listaSorteio.innerHTML + amigos[i] + " --> " + amigos[i + 1] + "<br>";
     }
   }
-  btnAdiciona.disabled = true;
-  btnAdiciona.classList.add('inactive');
-  btnSorteia.disabled = true;
-  btnSorteia.classList.add('inactive');
+  addRemove('add');
 }
 
 function embaralha(lista) {
@@ -80,11 +97,27 @@ function embaralha(lista) {
 }
 
 function reiniciar() {
-  limpaListas();
-  limpaNome();
-  amigos = [];
-  btnAdiciona.disabled = false;
-  btnAdiciona.classList.remove('inactive');
-  btnSorteia.disabled = false;
-  btnSorteia.classList.remove('inactive');
+  addRemove('remove');
+}
+
+function addRemove(value) {
+  if (value == "remove") {
+    limiteMinimo = 0;
+    document.getElementById("quantidade-minima").value = 0;
+    document.getElementById("num").innerHTML = 0;
+    limpaListas();
+    limpaNome();
+    amigos = [];
+    btnAdiciona.disabled = false;
+    document.getElementById("quantidade-minima").disabled = false;
+    btnAdiciona.classList.remove("inactive");
+    btnSorteia.disabled = false;
+    btnSorteia.classList.remove("inactive");
+  } else {
+    btnAdiciona.disabled = true;
+    document.getElementById("quantidade-minima").disabled = true;
+    btnAdiciona.classList.add("inactive");
+    btnSorteia.disabled = true;
+    btnSorteia.classList.add("inactive");
+  }
 }

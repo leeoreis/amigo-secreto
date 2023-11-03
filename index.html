@@ -26,6 +26,10 @@ https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css
         <section>
           <h1 class="section__title">Amigo <span>Secreto</span></h1>
           <form class="form">
+            <label class="form__label" for="quantidade-minima">
+              Quantidade mínima: <output style="color: white" for="quantidade-minima" id="num">0</output>
+            </label>
+            <input id="quantidade-minima" class="form__input__qtd" oninput="num.value = this.value" type="range" min="0" max="30" value="0" placeholder="Quantidade Mínima">
             <label class="form__label">
               Digite o nome de um amigo
             </label>
