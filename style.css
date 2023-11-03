@@ -204,3 +204,12 @@ body {
   background-color: #fff;
   color: #1875e8;
 }
+
+.inactive {
+  content: "";
+  display: block;
+  color: rgba(255,255,255,0.5);
+  width: 208px;
+  background-color: gray;
+  cursor: default;
+}

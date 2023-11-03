@@ -1,4 +1,6 @@
 let amigos = [];
+let btnAdiciona = document.getElementById('btn_adiciona');
+let btnSorteia = document.getElementById('btn_sorteia');
 
 function limpaNome() {
   document.getElementById("nome-amigo").value = "";
@@ -38,6 +40,7 @@ function sortear() {
   let limiteMinimo = 2;
   let listaSorteio = document.getElementById("lista-sorteio");
   let textoFalta = "";
+
   for (i = 0; i < amigos.length; i++) {
     if (amigos.length < limiteMinimo) {
       if (limiteMinimo - amigos.length > 1) {
@@ -60,6 +63,10 @@ function sortear() {
         listaSorteio.innerHTML + amigos[i] + " --> " + amigos[i + 1] + "<br>";
     }
   }
+  btnAdiciona.disabled = true;
+  btnAdiciona.classList.add('inactive');
+  btnSorteia.disabled = true;
+  btnSorteia.classList.add('inactive');
 }
 
 function embaralha(lista) {
@@ -76,4 +83,8 @@ function reiniciar() {
   limpaListas();
   limpaNome();
   amigos = [];
+  btnAdiciona.disabled = false;
+  btnAdiciona.classList.remove('inactive');
+  btnSorteia.disabled = false;
+  btnSorteia.classList.remove('inactive');
 }
